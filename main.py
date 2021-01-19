@@ -2,19 +2,17 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 import pytesseract
+# from camera_module import photo 
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 config = r'--psm 7 --oem 3 -l kor --tessdata-dir "C:\Program Files\Tesseract-OCR\tessdata"'
 plt.style.use('dark_background')
 
-img_ori = cv2.imread('3.jpg', cv2.IMREAD_GRAYSCALE)
+# for photo in range(10):
+    # img_ori= cv2.imread(str(photo)+'.jpg',cv2.VideoCapture)
 
-# hsv = cv2.cvtColor(img_ori, cv2.COLOR_BGR2HSV)
-# gray = hsv[:,:,2]
-
+img_ori = cv2.imread('1234.jpg',cv2.IMREAD_GRAYSCALE)
 height, width= img_ori.shape
-
 img_blurred = cv2.GaussianBlur(img_ori, ksize=(5, 5), sigmaX=0)
-
 img_thresh = cv2.adaptiveThreshold(
     img_blurred, 
     maxValue=255.0, 
@@ -253,7 +251,7 @@ for i, plate_img in enumerate(plate_imgs):
                 has_digit = True
             result_chars += c
     
-    print(result_chars)
+    # print(result_chars)
     plate_chars.append(result_chars)
 
     if has_digit and len(result_chars) > longest_text:
@@ -270,9 +268,12 @@ cv2.rectangle(img_out, pt1=(info['x'], info['y']), pt2=(info['x']+info['w'], inf
 
 cv2.imwrite(chars + '.jpg', img_out)
 
-plt.figure(figsize=(12, 10))
-plt.imshow(img_out, cmap='gray')
-plt.show()
 
 
- 
+    #  처리된이미지보기
+    # plt.figure(figsize=(12, 10))
+    # plt.imshow(img_out, cmap='gray')
+    # plt.show()
+
+
+    
